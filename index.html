@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FuseScope — open source observability on OpenTelemetry</title>
+<meta name="description" content="Open source observability built on OpenTelemetry and ClickHouse: traces, metrics, logs and real user monitoring, linked end to end, on your own infrastructure.">
+<link rel="canonical" href="https://fusescope.fuseone.io/">
+<link rel="icon" href="/assets/fusescope-mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/fusescope-app-icon.svg">
+<meta name="theme-color" content="#050a14">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fusescope.fuseone.io/">
+<meta property="og:title" content="FuseScope — open source observability on OpenTelemetry">
+<meta property="og:description" content="Open source observability built on OpenTelemetry and ClickHouse: traces, metrics, logs and real user monitoring, linked end to end, on your own infrastructure.">
+<meta property="og:image" content="https://fusescope.fuseone.io/assets/fusescope-og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#060b16}
+a{color:#3d8be0}a:hover{color:#6d9ad8}
+a:focus-visible,button:focus-visible{outline:2px solid #3d8be0;outline-offset:2px}
+.fs-hero{background-color:#050a14;background-image:radial-gradient(60rem 36rem at 15% -10%, rgba(15,95,184,0.55), transparent 60%),radial-gradient(50rem 30rem at 95% 10%, rgba(149,15,184,0.45), transparent 60%),linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);background-size:auto,auto,48px 48px,48px 48px}
+.fs-band{background-color:#050a14;background-image:radial-gradient(40rem 20rem at 0% 100%, rgba(15,95,184,0.45), transparent 60%),radial-gradient(40rem 20rem at 100% 0%, rgba(149,15,184,0.4), transparent 60%)}
+.fs-glow{box-shadow:0 0 0 1px rgba(109,154,216,0.25),0 40px 120px -20px rgba(61,139,224,0.45),0 30px 80px -30px rgba(192,79,224,0.5)}
+.fs-ring{background:linear-gradient(135deg,#3d8be0,#c04fe0);padding:1px;border-radius:24px}
+</style>
+</head>
+<body>
+<div style="font-family: Inter, 'Segoe UI', -apple-system, system-ui, sans-serif; color: #eceef2; background: #060b16; min-height: 100vh">
+
+<header class="fs-hero">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 1.5rem">
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 0">
+<a href="#top" aria-label="FuseScope home" style="display: flex; align-items: center"><img src="/assets/fusescope-logo-white.svg" alt="FuseScope" style="height: 32px; width: auto; display: block"></a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 28px; font-size: 15px; font-weight: 500">
+<a href="#product" style="color: #b8bfcc; text-decoration: none">Product</a>
+<a href="#integrations" style="color: #b8bfcc; text-decoration: none">Integrations</a>
+<a href="https://fuseone-io.github.io/fusescope-docs/" style="color: #b8bfcc; text-decoration: none">Docs</a>
+<a href="https://github.com/fuseone-io/fusescope" style="color: #b8bfcc; text-decoration: none">GitHub</a>
+<a href="https://demo.fusescope.fuseone.io" style="background: #ffffff; color: #050a14; text-decoration: none; font-weight: 600; padding: 10px 18px; border-radius: 9999px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Live demo</a>
+</div>
+</nav>
+
+<div id="top" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 28px; padding: 88px 0 56px">
+<a href="https://fuseone-io.github.io/fusescope-docs/frontend/set-up-android/" style="display: inline-flex; align-items: center; gap: 10px; padding: 6px 14px 6px 6px; border-radius: 9999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #eceef2; text-decoration: none; font-size: 14px; font-weight: 500">
+<span style="background: linear-gradient(135deg,#0f5fb8,#950fb8); color: #ffffff; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 9999px; letter-spacing: 0.02em">NEW</span>
+Android crashes and ANRs, retraced
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+</a>
+<h1 style="margin: 0; font-size: clamp(2.75rem, 7vw, 5.5rem); line-height: 1.02; font-weight: 800; letter-spacing: -0.04em; color: #ffffff; max-width: 15ch">Every signal, one&#160;scope.</h1>
+<p style="margin: 0; font-size: clamp(1.05rem, 1.6vw, 1.3rem); line-height: 1.65; color: #b8bfcc; max-width: 40rem">Open source observability built on OpenTelemetry and ClickHouse. Traces, metrics, logs and real user monitoring, linked end to end, on your own infrastructure.</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px">
+<a href="https://demo.fusescope.fuseone.io" style="background: #3d8be0; color: #011228; text-decoration: none; font-weight: 700; font-size: 16px; padding: 14px 24px; border-radius: 9999px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 10px 30px -8px rgba(61,139,224,0.7)">Explore the live demo
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<a href="#start" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.18); color: #ffffff; text-decoration: none; font-weight: 600; font-size: 16px; padding: 14px 24px; border-radius: 9999px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px">$ helm install fusescope</a>
+</div>
+<p style="margin: 0; font-size: 14px; color: #8e98a8">MIT licensed · Self-hosted · No license key</p>
+</div>
+
+<div style="padding: 0 0 0; position: relative">
+<div class="fs-glow" role="img" aria-label="FuseScope trace view: a checkout request waterfall across frontend, checkout, payment and database spans" style="background: #0b1220; border: 1px solid #1f2937; border-radius: 20px 20px 0 0; overflow: hidden; border-bottom: none">
+<div aria-hidden="true" style="display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid #1f2937; background: #0e1626">
+<span style="width: 11px; height: 11px; border-radius: 9999px; background: #2a3445"></span>
+<span style="width: 11px; height: 11px; border-radius: 9999px; background: #2a3445"></span>
+<span style="width: 11px; height: 11px; border-radius: 9999px; background: #2a3445"></span>
+<span style="margin-left: 14px; font-size: 13px; color: #8e98a8; font-family: 'JetBrains Mono', ui-monospace, monospace">fusescope / traces / POST /api/checkout</span>
+</div>
+<div aria-hidden="true" style="display: flex; flex-wrap: wrap">
+<div style="flex: 1 1 220px; min-width: 0; border-right: 1px solid #1f2937; padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #8e98a8">Session</span>
+<div style="display: flex; flex-direction: column; gap: 10px">
+
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>
+<span style="color: #eceef2; flex: 1 1 auto">View /cart</span>
+<span style="color: #8e98a8; font-variant-numeric: tabular-nums">0.0 s</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>
+<span style="color: #eceef2; flex: 1 1 auto">Click &quot;Pay now&quot;</span>
+<span style="color: #8e98a8; font-variant-numeric: tabular-nums">4.2 s</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #c04fe0; flex: none"></span>
+<span style="color: #eceef2; flex: 1 1 auto">POST /api/checkout</span>
+<span style="color: #8e98a8; font-variant-numeric: tabular-nums">4.3 s</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #f87171; flex: none"></span>
+<span style="color: #eceef2; flex: 1 1 auto">Error: card declined</span>
+<span style="color: #8e98a8; font-variant-numeric: tabular-nums">4.9 s</span>
+</div>
+
+<div style="display: flex; align-items: center; gap: 10px; font-size: 13px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>
+<span style="color: #eceef2; flex: 1 1 auto">View /checkout/retry</span>
+<span style="color: #8e98a8; font-variant-numeric: tabular-nums">5.1 s</span>
+</div>
+
+</div>
+<div style="margin-top: 6px; border-radius: 12px; background: rgba(192,79,224,0.12); border: 1px solid rgba(192,79,224,0.35); padding: 12px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #e0a6f0">LCP · p75</span>
+<span style="font-size: 26px; font-weight: 700; color: #ffffff; font-variant-numeric: tabular-nums">2.1 s</span>
+</div>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: #8e98a8"><span>Span</span><span>0 ms — 640 ms</span></div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: center; font-size: 13px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; color: #eceef2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 0px">POST /api/checkout</span>
+<div style="position: relative; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.03)">
+<span style="position: absolute; top: 3px; bottom: 3px; left: 0%; width: 100%; border-radius: 4px; background: #3d8be0"></span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: center; font-size: 13px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; color: #eceef2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 12px">checkout.Place</span>
+<div style="position: relative; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.03)">
+<span style="position: absolute; top: 3px; bottom: 3px; left: 4%; width: 88%; border-radius: 4px; background: #6d9ad8"></span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: center; font-size: 13px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; color: #eceef2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 24px">cart.Get</span>
+<div style="position: relative; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.03)">
+<span style="position: absolute; top: 3px; bottom: 3px; left: 6%; width: 14%; border-radius: 4px; background: #6d9ad8"></span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: center; font-size: 13px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; color: #eceef2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 24px">payment.Charge</span>
+<div style="position: relative; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.03)">
+<span style="position: absolute; top: 3px; bottom: 3px; left: 22%; width: 62%; border-radius: 4px; background: #c04fe0"></span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: center; font-size: 13px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; color: #eceef2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 36px">SELECT cards</span>
+<div style="position: relative; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.03)">
+<span style="position: absolute; top: 3px; bottom: 3px; left: 24%; width: 9%; border-radius: 4px; background: #d48aea"></span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: center; font-size: 13px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; color: #eceef2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 36px">gateway.Authorize</span>
+<div style="position: relative; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.03)">
+<span style="position: absolute; top: 3px; bottom: 3px; left: 35%; width: 46%; border-radius: 4px; background: #f87171"></span>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: center; font-size: 13px">
+<span style="font-family: 'JetBrains Mono', ui-monospace, monospace; color: #eceef2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-left: 24px">orders.Save</span>
+<div style="position: relative; height: 22px; border-radius: 6px; background: rgba(255,255,255,0.03)">
+<span style="position: absolute; top: 3px; bottom: 3px; left: 86%; width: 6%; border-radius: 4px; background: #6d9ad8"></span>
+</div>
+</div>
+
+<div style="margin-top: 6px; display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; font-family: 'JetBrains Mono', ui-monospace, monospace">
+<span style="padding: 4px 10px; border-radius: 6px; background: #031f40; color: #9dbbe0">service.name=payment</span>
+<span style="padding: 4px 10px; border-radius: 6px; background: #3a0d12; color: #fca5a5">status=ERROR</span>
+<span style="padding: 4px 10px; border-radius: 6px; background: #1f2937; color: #b8bfcc">db.system=postgresql</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+<section aria-label="Built on" style="border-top: 1px solid #1f2937; border-bottom: 1px solid #1f2937; background: #070d19">
+<div style="max-width: 1240px; margin: 0 auto; padding: 28px 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px 40px; color: #8e98a8; font-size: 15px; font-weight: 600">
+<span style="font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600">Built on open standards</span>
+<span>OpenTelemetry</span><span>ClickHouse</span><span>PromQL</span><span>Kubernetes</span><span>Helm</span><span>Sigstore</span>
+</div>
+</section>
+
+<main>
+<section id="product" style="max-width: 1240px; margin: 0 auto; padding: 112px 1.5rem 56px">
+<div style="max-width: 44rem; display: flex; flex-direction: column; gap: 16px; margin-bottom: 56px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #c04fe0">One platform</p>
+<h2 style="margin: 0; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.035em; color: #ffffff">From a slow tap to the query that caused it.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.7; color: #b8bfcc">Follow one request from the browser or the Android app, through every service, down to the log line and the database call.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 20px">
+<article style="grid-column: 1 / -1; min-width: 0; background: linear-gradient(180deg, #0e1626, #0a1120); border: 1px solid #1f2937; border-radius: 24px; padding: 32px; display: flex; flex-wrap: wrap; gap: 28px; align-items: center">
+<div style="flex: 1 1 260px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: rgba(61,139,224,0.15); color: #6d9ad8; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"></path></svg></span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff">APM and distributed tracing</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">Service maps, latency percentiles and error rates per endpoint, with every trace one click away.</p>
+</div>
+<div aria-hidden="true" style="flex: 1 1 280px; min-width: 0; height: 160px; display: flex; align-items: flex-end; gap: 5px; padding: 12px; border-radius: 16px; background: #050a14; border: 1px solid #1f2937; box-sizing: border-box">
+
+<span style="flex: 1 1 0; height: 34%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 40%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 37%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 46%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 42%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 51%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 45%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 41%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 56%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 49%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 44%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 60%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 88%; border-radius: 4px 4px 0 0; background: #c04fe0"></span>
+
+<span style="flex: 1 1 0; height: 95%; border-radius: 4px 4px 0 0; background: #c04fe0"></span>
+
+<span style="flex: 1 1 0; height: 72%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 55%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 49%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 46%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 52%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 48%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 43%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 50%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 45%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 41%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 47%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 44%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 40%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+<span style="flex: 1 1 0; height: 46%; border-radius: 4px 4px 0 0; background: #3d8be0"></span>
+
+</div>
+</article>
+
+<article style="min-width: 0; background: #0b1220; border: 1px solid #1f2937; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: rgba(192,79,224,0.15); color: #d48aea; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18v12H3zM8 21h8M12 17v4"></path></svg></span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff">Real user monitoring</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">Sessions and Web Vitals for the web, crashes and ANRs for Android, retraced and linked to backend traces.</p>
+</article>
+
+<article style="min-width: 0; background: #0b1220; border: 1px solid #1f2937; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: rgba(61,139,224,0.15); color: #6d9ad8; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"></path></svg></span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff">Logs</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">Search and aggregate logs, parse them with pipelines, and jump from any line to its trace.</p>
+<div aria-hidden="true" style="margin-top: 4px; border-radius: 12px; background: #050a14; border: 1px solid #1f2937; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px">
+
+<div style="display: flex; gap: 10px; white-space: nowrap; overflow: hidden"><span style="color: #6d9ad8; font-weight: 600; flex: none">INFO</span><span style="color: #b8bfcc; overflow: hidden; text-overflow: ellipsis">checkout started cart_id=8f3a</span></div>
+
+<div style="display: flex; gap: 10px; white-space: nowrap; overflow: hidden"><span style="color: #fbbf24; font-weight: 600; flex: none">WARN</span><span style="color: #b8bfcc; overflow: hidden; text-overflow: ellipsis">retrying gateway call attempt=2</span></div>
+
+<div style="display: flex; gap: 10px; white-space: nowrap; overflow: hidden"><span style="color: #f87171; font-weight: 600; flex: none">ERROR</span><span style="color: #b8bfcc; overflow: hidden; text-overflow: ellipsis">card declined trace_id=4bf9…</span></div>
+
+</div>
+</article>
+
+<article style="min-width: 0; background: #0b1220; border: 1px solid #1f2937; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: rgba(61,139,224,0.15); color: #6d9ad8; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg></span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff">Metrics and dashboards</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">PromQL or a visual query builder over the same data, on dashboards your whole team can share.</p>
+</article>
+
+<article style="min-width: 0; background: #0b1220; border: 1px solid #1f2937; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: rgba(192,79,224,0.15); color: #d48aea; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"></path></svg></span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff">Alerts</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">Threshold rules on any signal, routed to Slack, PagerDuty, Microsoft Teams or a webhook.</p>
+</article>
+
+<article style="min-width: 0; background: #0b1220; border: 1px solid #1f2937; border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 12px">
+<span style="width: 44px; height: 44px; border-radius: 12px; background: rgba(61,139,224,0.15); color: #6d9ad8; display: flex; align-items: center; justify-content: center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v6H4zM4 14h16v6H4zM8 7h.01M8 17h.01"></path></svg></span>
+<h3 style="margin: 0; font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: #ffffff">Infrastructure</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">Hosts, Kubernetes clusters, pods and nodes, beside the services that run on them.</p>
+</article>
+</div>
+</section>
+
+<section style="max-width: 1240px; margin: 0 auto; padding: 56px 1.5rem">
+<div class="fs-ring">
+<div style="background: #070d19; border-radius: 23px; padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: #ffffff; line-height: 1">0</span>
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #ffffff">Proprietary agents</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">Send data with any OTLP client. Our SDKs are thin, signed distributions of the official OpenTelemetry SDKs, recommended and never required.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: #ffffff; line-height: 1">Hot + cold</span>
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #ffffff">ClickHouse, tiered</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">Recent data on fast disks, older data on S3 or Google Cloud Storage, still queryable. Retention per signal.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-size: 44px; font-weight: 800; letter-spacing: -0.04em; color: #ffffff; line-height: 1">MIT</span>
+<h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #ffffff">Open source, self-hosted</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #b8bfcc">The platform, its Helm charts and its integration catalog are public. Your telemetry never leaves your infrastructure.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="integrations" style="max-width: 1240px; margin: 0 auto; padding: 56px 1.5rem">
+<div style="display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #c04fe0">Integrations</p>
+<h2 style="margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.035em; color: #ffffff">Install in a click. Upgrade when it ships.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.7; color: #b8bfcc">Every integration is a versioned package from a signed catalog: collector configuration, log pipelines and dashboards.</p>
+<a href="https://github.com/fuseone-io/fusescope-integrations" style="font-weight: 600; font-size: 16px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px">Browse the catalog
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+<ul style="flex: 1 1 480px; min-width: 0; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px">
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>PostgreSQL</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #c04fe0; flex: none"></span>MySQL</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>Redis</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #c04fe0; flex: none"></span>MongoDB</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>ClickHouse</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #c04fe0; flex: none"></span>Nginx</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>AWS RDS</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #c04fe0; flex: none"></span>AWS ElastiCache</li>
+
+<li style="background: #0b1220; border: 1px solid #1f2937; border-radius: 14px; padding: 18px 16px; font-size: 15px; font-weight: 600; color: #eceef2; display: flex; align-items: center; gap: 10px">
+<span style="width: 8px; height: 8px; border-radius: 9999px; background: #3d8be0; flex: none"></span>Google Cloud SQL</li>
+
+</ul>
+</div>
+</section>
+
+<section id="start" style="max-width: 1240px; margin: 0 auto; padding: 56px 1.5rem 112px">
+<div style="display: flex; flex-wrap: wrap; gap: 56px; align-items: center">
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #c04fe0">Get started</p>
+<h2 style="margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.035em; color: #ffffff">Two commands to your first trace.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.7; color: #b8bfcc">Install with Helm on Kubernetes, or with Docker Compose on a single machine. Then point your OpenTelemetry SDKs at it.</p>
+<a href="https://fuseone-io.github.io/fusescope-docs/" style="font-weight: 600; font-size: 16px; display: inline-flex; align-items: center; gap: 6px; min-height: 44px">Installation guide
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+</div>
+<div class="fs-glow" style="flex: 1 1 520px; min-width: 0; background: #050a14; border: 1px solid #1f2937; border-radius: 20px; overflow: hidden">
+<div style="display: flex; align-items: center; gap: 8px; padding: 12px 16px; border-bottom: 1px solid #1f2937; background: #0b1220">
+<span aria-hidden="true" style="width: 11px; height: 11px; border-radius: 9999px; background: #2a3445"></span>
+<span aria-hidden="true" style="width: 11px; height: 11px; border-radius: 9999px; background: #2a3445"></span>
+<span aria-hidden="true" style="width: 11px; height: 11px; border-radius: 9999px; background: #2a3445"></span>
+<span style="margin-left: 12px; font-size: 13px; color: #8e98a8">Terminal</span>
+</div>
+<div style="padding: 24px; overflow-x: auto">
+<pre style="margin: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 14px; line-height: 1.9; color: #eceef2"><span style="color: #c04fe0">$</span> helm repo add fusescope https://fuseone-io.github.io/fusescope-charts
+<span style="color: #c04fe0">$</span> helm install fusescope fusescope/fusescope \
+    -n platform --create-namespace
+<span style="color: #8e98a8"># then open the UI and create your first service</span></pre>
+</div>
+</div>
+</div>
+</section>
+
+<section class="fs-band">
+<div style="max-width: 1240px; margin: 0 auto; padding: 112px 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px">
+<img src="/assets/fusescope-mark.svg" alt="" style="width: 64px; height: 64px">
+<h2 style="margin: 0; font-size: clamp(2.25rem, 5vw, 4rem); line-height: 1.05; font-weight: 800; letter-spacing: -0.04em; color: #ffffff; max-width: 18ch">See it running with real data.</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.7; color: #b8bfcc; max-width: 36rem">The public demo runs a sample shop with traces, logs, metrics and real user monitoring. No sign-up.</p>
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px">
+<a href="https://demo.fusescope.fuseone.io" style="background: #ffffff; color: #050a14; text-decoration: none; font-weight: 700; font-size: 16px; padding: 14px 26px; border-radius: 9999px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center">Open the live demo</a>
+<a href="https://github.com/fuseone-io/fusescope" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.2); color: #ffffff; text-decoration: none; font-weight: 600; font-size: 16px; padding: 14px 26px; border-radius: 9999px; min-height: 52px; box-sizing: border-box; display: inline-flex; align-items: center">Star on GitHub</a>
+</div>
+</div>
+</section>
+</main>
+
+<footer style="background: #050a14; border-top: 1px solid #1f2937">
+<div style="max-width: 1240px; margin: 0 auto; padding: 36px 1.5rem; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; font-size: 14px; color: #8e98a8">
+<div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<img src="/assets/fusescope-logo-white.svg" alt="FuseScope" style="height: 24px; width: auto; display: block">
+<span>A FuseOne product · MIT licensed</span>
+</div>
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 24px">
+<a href="https://fuseone-io.github.io/fusescope-docs/" style="color: #b8bfcc">Docs</a>
+<a href="https://github.com/fuseone-io/fusescope" style="color: #b8bfcc">GitHub</a>
+<a href="https://github.com/fuseone-io/fusescope-charts" style="color: #b8bfcc">Helm charts</a>
+<a href="https://demo.fusescope.fuseone.io" style="color: #b8bfcc">Demo</a>
+</nav>
+</div>
+</footer>
+</div>
+</body>
+</html>
